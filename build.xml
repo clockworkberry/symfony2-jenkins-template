@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="name-of-project" default="build">
-    <target name="build" depends="prepare,vendors,parameters,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
+<project name="Perekrestok" default="build">
+    <target name="build" depends="prepare,composer,parameters,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb"/>
 
     <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
 
@@ -17,6 +17,17 @@
         </parallel>
     </target>
 
+    <target name="composer" description="Installing dependencies">
+        <exec executable="wget" failonerror="true">
+            <arg value="-nc" />
+            <arg value="http://getcomposer.org/composer.phar" />
+        </exec>
+        <exec executable="php" failonerror="true">
+            <arg value="composer.phar" />
+            <arg value="install" />
+        </exec>
+    </target>
+
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/app/build/api"/>
         <delete dir="${basedir}/app/build/code-browser"/>
@@ -31,7 +42,7 @@
         <mkdir dir="${basedir}/app/build/coverage"/>
         <mkdir dir="${basedir}/app/build/logs"/>
         <mkdir dir="${basedir}/app/build/pdepend"/>
-        <mkdir dir="${basedir}/app/build/phpdox"/>
+        <!--<mkdir dir="${basedir}/app/build/phpdox"/>-->
     </target>
 
     <target name="lint" description="Perform syntax check of sourcecode files">
@@ -109,12 +120,12 @@
         </exec>
     </target>
 
-    <target name="phpdox" description="Generate API documentation using phpDox">
-        <exec executable="phpdox">
-            <arg value="-f" />
-            <arg path="${basedir}/app/Resources/jenkins/phpdox.xml" />
-        </exec>
-    </target>
+    <!--<target name="phpdox" description="Generate API documentation using phpDox">-->
+        <!--<exec executable="phpdox">-->
+            <!--<arg value="-f" />-->
+            <!--<arg path="${basedir}/app/Resources/jenkins/phpdox.xml" />-->
+        <!--</exec>-->
+    <!--</target>-->
 
     <target name="phpunit" description="Run unit tests with PHPUnit">
         <exec executable="phpunit" failonerror="true">
@@ -134,16 +145,16 @@
         </exec>
     </target>
 
-    <target name="vendors" description="Update vendors">
-        <exec executable="${basedir}/bin/vendors" failonerror="true">
-            <arg value="update" />
-        </exec>
-    </target>
+    <!--<target name="vendors" description="Update vendors">-->
+        <!--<exec executable="${basedir}/bin/vendors" failonerror="true">-->
+            <!--<arg value="update" />-->
+        <!--</exec>-->
+    <!--</target>-->
 
     <target name="parameters" description="Copy parameters">
         <exec executable="cp" failonerror="true">
-            <arg path="app/config/parameters.ini.template" />
-            <arg path="app/config/parameters.ini" />
+            <arg path="app/config/parameters.yml.dist" />
+            <arg path="app/config/parameters.yml" />
         </exec>
     </target>
 </project>
