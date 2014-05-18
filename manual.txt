@@ -34,7 +34,8 @@ http://wiki.phpmyadmin.net/pma/Jenkins_Setup)
 	$ wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 	$  java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin checkstyle cloverphp crap4j dry htmlpublisher jdepend plot pmd violations xunit git-client
 	ручками установить Git Plugin через вебинтерфейс http://192.168.33.10:8080/pluginManager/available
-	чтобы дженкинс мог запускать утилиты установленные юзеру vagrant в веб интерфейсе дженкинса Manage Jenkins -> Configure system:Global properties: Environment variables добавить 		переменную name = PATH и value = $PATH:/home/vagrant/.composer/vendor/bin
+	чтобы дженкинс мог запускать утилиты установленные юзеру vagrant в веб интерфейсе дженкинса Manage Jenkins -> Configure system:Global properties: Environment variables
+	добавить переменную name = PATH и value = $PATH:/home/vagrant/.composer/vendor/bin
 	установить ant в Manage Jenkins -> Ant installations: указать имя версии и установить из apache. Затем прописать в настройках анта в джобе эту же версию.
 
 9 Симфони темплейт для дженкинс (основано на реальных событиях отсюда http://habrahabr.ru/post/168383/)
@@ -49,5 +50,4 @@ http://wiki.phpmyadmin.net/pma/Jenkins_Setup)
 		перегружаем конфигурацию дженкинса:
 			$ java -jar jenkins-cli.jar -s http://localhost:8080 reload-configuration
 
-	b) создать новый job черзе веб интерфейс дженкинса http://192.168.33.10:8080(ip виртуалки): New Item, Copy existing item (выбрать symfony2-jenkins-template), настроить Git: указать 			креды и ветку.
-	
+	b) создать новый job черзе веб интерфейс дженкинса http://192.168.33.10:8080(ip виртуалки): New Item, Copy existing item (выбрать symfony2-jenkins-template), настроить Git: указать креды и ветку.
