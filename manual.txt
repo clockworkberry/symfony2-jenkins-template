@@ -20,7 +20,7 @@
 
 7 Установка утилит для создания билда
 	$ curl -sS https://getcomposer.org/installer | php
-	$ php composer.php global install - будет ошибка, но создастся папка .composer и какие то служебные файлы
+	$ php composer.php global install - вызываем, чтобы создалась папка .composer с служебными файлами.
 	скачать и положить файл composer.json в .composer/composer.json
 	$ php composer.php global install
 	$ touch .bash_profile
@@ -36,9 +36,10 @@ http://wiki.phpmyadmin.net/pma/Jenkins_Setup)
 	ручками установить Git Plugin через вебинтерфейс http://192.168.33.10:8080/pluginManager/available
 	чтобы дженкинс мог запускать утилиты установленные юзеру vagrant в веб интерфейсе дженкинса Manage Jenkins -> Configure system:Global properties: Environment variables
 	добавить переменную name = PATH и value = $PATH:/home/vagrant/.composer/vendor/bin
-	установить ant в Manage Jenkins -> Ant installations: указать имя версии и установить из apache. Затем прописать в настройках анта в джобе эту же версию.
+	установить ant в Manage Jenkins -> Ant installations: указать имя версии(например ant-1.9.2). Ант автоматически подтянется и апаче.
+	    Затем выбрать в селекте в настройках анта в проекте(джобе) (Configure: Build: Invoke Ant) эту версию.
 
-9 Симфони темплейт для дженкинс (основано на реальных событиях отсюда http://habrahabr.ru/post/168383/)
+9 Симфони темплейт для дженкинс (основано на реальных событиях описанных в этом завете http://habrahabr.ru/post/168383/)
 
 	 a) $ git clone https://github.com/clockworkberry/symfony2-jenkins-template.git
 		файл config.xml нужно положить в джобы дженкинса:
